@@ -60,10 +60,12 @@
                         %% http://ctan.org/pkg/subcaption
 
 
+\newcommand{\atl}{ATLAS }
+
 \begin{document}
 
 %% Title information
-\title[Short Title]{Capri-Based ATLAS, automatically pruning search space in auto-tuning}         %% [Short Title] is optional;
+\title[Short Title]{Capri-Based ATLAS: A Faster and Better Linear Algebra Auto-tunning Library}         %% [Short Title] is optional;
                                         %% when present, will be used in
                                         %% header instead of Full Title.
 \titlenote{with title note}             %% \titlenote is optional;
@@ -97,11 +99,11 @@
 }
 \email{hejy@cs.utexas.edu.com}         %% \email is recommended
 
-
 %% Abstract
 %% Note: \begin{abstract}...\end{abstract} environment must come
 %% before \maketitle command
 \begin{abstract}
+
 Auto-tuning is a general approach to find the optimal optimization parameters such as tile sizes in matrix multiplication.
 There are two main approaches in auto-tuning: empirical search and model-based. 
 Empirical search is universal but slow, and some heuristic to reduce search space may prune out best solutions. 
@@ -117,6 +119,7 @@ We evaluate the system on 12 platforms. Our experiments show that  Capri-based A
 
 \cite{yotov2005search}\cite{sui2016proactive}
  \ldots.
+
 \end{abstract}
 
 %% 2012 ACM Computing Classification System (CSS) concepts
@@ -152,6 +155,7 @@ We evaluate the system on 12 platforms. Our experiments show that  Capri-based A
 %% environment and commands, and keywords command.
 \maketitle
 
+
 \input{sections/introduction}
 \input{sections/motivation}
 \input{sections/design}
@@ -166,11 +170,11 @@ We evaluate the system on 12 platforms. Our experiments show that  Capri-based A
                                         %% contents suppressed with 'anonymous'
   %% extraction tools.
   This work is based on ATLAS software and Capri project. The authors would
-  like to thank Swarnendu(UTCS), Xin Sui(Tableau Software) for the Capri
-  development and all the ATLAS developers.
+  like to thank Swarnendu(UTCS), Xin Sui(Tableau Software) and all the ATLAS
+  developers.
 
   Yan Pei: I really enjoy this class. The course proves again that reading
-  paper with discussion is a great method to learn. I learned a lot
+  paper with discussion is be a great method of learning. I learned a lot
   during this class. The abstractions and high level ideas introduced in
   this class should be useful in my research career. On the other hand, I
   really wanna express my gratitude to Dr. Pingali and all my classmates.
@@ -182,7 +186,7 @@ We evaluate the system on 12 platforms. Our experiments show that  Capri-based A
 
 
 %% Bibliography
-\bibliography{sections/reference}
+%\bibliography{bibfile}
 
 
 %% Appendix
