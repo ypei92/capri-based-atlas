@@ -1,2 +1,23 @@
 \section{Design}
 \label{sec:design}
+
+The design of the Capri-based \atl can be separated into two phases: the offline
+training phase and the online testing phase.
+
+\begin{figure*}[tbhp]
+  \centering
+  \begin{subfigure}[b]{1.0\linewidth}
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/offline_training.png}
+    \caption{Offline training phase: \atl profiling and Capri model building}
+  \end{subfigure}
+  \begin{subfigure}[b]{1.0\linewidth}
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/testing.png}
+    \caption{Online testing phase: Capri model searching and \atl execution}
+  \end{subfigure}
+  \caption{Capri-based \atl design diagram}
+  \label{fig:offline_training}
+\end{figure*}
+
+$mflops = f(platform, NB, MU, NU, KU)$
