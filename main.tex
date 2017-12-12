@@ -63,7 +63,7 @@
 \begin{document}
 
 %% Title information
-\title[Short Title]{Capri-Based ATLAS}         %% [Short Title] is optional;
+\title[Short Title]{Capri-Based ATLAS, automatically pruning search space in auto-tuning}         %% [Short Title] is optional;
                                         %% when present, will be used in
                                         %% header instead of Full Title.
 \titlenote{with title note}             %% \titlenote is optional;
@@ -97,11 +97,26 @@
 }
 \email{hejy@cs.utexas.edu.com}         %% \email is recommended
 
+
 %% Abstract
 %% Note: \begin{abstract}...\end{abstract} environment must come
 %% before \maketitle command
 \begin{abstract}
-Text of abstract \ldots.
+Auto-tuning is a general approach to find the optimal optimization parameters such as tile sizes in matrix multiplication.
+There are two main approaches in auto-tuning: empirical search and model-based. 
+Empirical search is universal but slow, and some heuristic to reduce search space may prune out best solutions. 
+Model-based auto-tuning predicts the best parameters by platform abstractions but the performance can degrade.  
+\par  
+ATLAS uses orthogonal line search to try parameters in a limited space. 
+The search takes a long time and the space is not guaranteed to include the optimal points. 
+In this project, we introduce Capri-based ATLAS search, to reduce the search time and achieve high performance simultaneously. 
+Capri first takes the results of exhaustive search and trains them offline. During the ATLAS code generation, it provides candidate parameters for ATLAS to run on the platform and pick the best.
+\par
+We evaluate the system on 12 platforms. Our experiments show that  Capri-based ATLAS search achieves XXX speedup over ATLAS orthogonal line search and it only suffers YYY performance degradation.
+
+
+\cite{yotov2005search}\cite{sui2016proactive}
+ \ldots.
 \end{abstract}
 
 
@@ -166,7 +181,7 @@ Text of abstract \ldots.
 
 
 %% Bibliography
-%\bibliography{bibfile}
+\bibliography{sections/reference}
 
 
 %% Appendix
