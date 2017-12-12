@@ -1,8 +1,28 @@
 \section{Design}
 \label{sec:design}
 
-The design of the Capri-based \atl can be separated into two phases: the offline
-training phase and the online testing phase.
+The design of the Capri-based \atl can be separated into four parts: knob
+selection, feature selection, the offline training phase and the online testing
+phase. Knobs, as descried
+The offline training phase captures
+the characteristics of the platform features and knob settings by doing
+exhaustive runs. Capri uses the profiling data and builds a model for the \gem
+performance based on featues and knobs. In the testing phase, the model takes
+a platform and a ``top M'' constraint as input, and output the best predicted
+knob setting for GEMM for this platform.
+
+  \subsection{Knob selection}
+  \label{sec:knobs}
+
+  \subsection{Feature selection}
+  \label{sec:features}
+  Features are used in Capri as the identification for different inputs.
+
+  \subsection{Offline Training}
+  \label{sec:offline_training}
+
+  \subsection{Online Testing}
+  \label{sec:online_training}
 
 \begin{figure*}[tbhp]
   \centering
@@ -17,7 +37,7 @@ training phase and the online testing phase.
     \caption{Online testing phase: Capri model searching and \atl execution}
   \end{subfigure}
   \caption{Capri-based \atl design diagram}
-  \label{fig:offline_training}
+  \label{fig:design}
 \end{figure*}
 
 $mflops = f(platform, NB, MU, NU, KU)$
