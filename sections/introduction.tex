@@ -1,2 +1,10 @@
 \section{Introduction}
 \label{sec:intro}
+
+A key step in program optimization is the estimation of optimal values for
+parameters such as tile sizes and loop unrolling factors. Currently programmers
+usually rely on optimization techiques provided by traditional compilers, which
+is often too generalized to produce desired performance. General compilers
+cannot take care of operations such as general matrix multiply(GEMM), whose
+performance is heavily based on the how the programme is written and how the
+parameter is set.
