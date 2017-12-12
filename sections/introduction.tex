@@ -2,15 +2,18 @@
 \label{sec:intro}
 
 A key step in program optimization is the estimation of optimal values for
-parameters such as tile sizes and loop unrolling factors. Currently programmers
-usually rely on optimization techiques provided by traditional compilers, which
-is often too generalized to produce desired performance. General compilers
-cannot take care of operations such as general matrix multiply(GEMM), whose
-performance is heavily based on the how the programme is written and how the
-parameter is set.
+parameters such as tile sizes and loop unrolling factors. 
+Currently programmers usually rely on optimization techiques provided by traditional compilers, which
+is often too generalized to produce desired performance. 
+General compiler techniques cannot take care of applications such as general matrix multiply(GEMM), 
+whose performance is heavily based on those optimization parameters. 
+What's more, the parameters must be tuned for a given platform and thus impractical to tune by hand.
+
+
+%Optimization parameters of high performance programs must be tuned for a given platform. 
+%how the program is written and how the optimization parameter is set.
 \par
-=============There needs something=============
-Optimization parameters of high performance programs must be tuned for a given platform. 
+
 Auto-tuning is a straight-forward and one of the simplest way to find the optimal parameters.
 There are two major kinds of auto-tuning approach: empirical search and model-based tuning. 
 \par
