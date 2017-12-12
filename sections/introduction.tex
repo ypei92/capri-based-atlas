@@ -1,2 +1,19 @@
 \section{Introduction}
 \label{sec:intro}
+
+Optimization parameters of high performance programs must be tuned for a given platform. 
+Auto-tuning is a straight-forward and one of the simplest way to find the optimal parameters.
+Empirical search and model-based tuning are two major kinds of approach. 
+Empirical search tries every data point in the parameter space and evaluate the performance of
+them to get the optimal solution. 
+However, exaustively searching the whole parameter space is slow and impractical. 
+The search space is usually too large and contains lots of low performance points where
+it is unneccesary to waste time. 
+\par
+Programmers with hardware and application knowledge can prune the space to reduce the search time.
+ATLAS uses orthogonal line search to auto-tune its optimization parameters. 
+It assumes that the parameters are independent to performance and the optimizal values can be 
+restricted by some architecture features like number of registers, size of L1 cache. 
+
+
+
