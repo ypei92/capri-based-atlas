@@ -1,2 +1,10 @@
 \section{Conclusion}
 \label{sec:conclusion}
+
+
+In this project, we adopts Capri to the search procedure of ATLAS. 
+Capri is able to build a model to reduce the search time and predict high performance optimization parameters simultaneously.
+Capri first takes the results of exhaustive search on many platforms and trains them offline. 
+During the ATLAS code generation, it provides candidate parameters for ATLAS to run on the actual platform and pick the best.
+\par
+We evaluate the system on 12 platforms with 2 ARM and 10 Intel platforms. Our experiments show that over ATLAS orthogonal line search, Capri-based ATLAS search achieves an average of 10.9X speedup and the MFLOPS performance of generated code is 11\% higher. It only suffers 2\% performance degradation from best of exhaustive search.
