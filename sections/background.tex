@@ -3,7 +3,7 @@
 
   \subsection{ATLAS code generator}
   \label{sec:atlas_intro}
-  The ATLAS (Automatically Tuned Linear Algebra Software) is a software focusing on high performance 
+  ATLAS (Automatically Tuned Linear Algebra Software) is a software focusing on high performance 
   BLAS (Basic Linear Algebra Subprograms) on different platforms. It applies both empirical search and model-based 
   tuning in order to provide portable performance. \par
   
@@ -33,7 +33,7 @@
   Furthermore, it is profitable to unroll the last dimension by a factor of $KU$.
   In the above three steps, four optimization parameters $NB$, $MU$, $NU$ and $KU$ are significant to the performance. \par
 
-  ATLAS also search the optimal values of other parameters like $LS$, the latency for computation scheduling, $IF$, $FF$, $NF$, three fetching parameters 
+  ATLAS also search the optimal values of other parameters like $LS$, the latency for computation scheduling, $FMA$, if the fused multiply-add unit is available, $IF$, $FF$, $NF$, three fetching parameters 
   for load scheduling. For now, we only consider the tiling and unrolling parameters \textbf{\textit{NB}}, \textbf{\textit{MU}}, \textbf{\textit{NU}} and \textbf{\textit{KU}} since 1) the exhaustive search space of them 
   is already very huge which typically takes us more than ten hours to generate training data, and 2) the model built from these four parameters are already able to
   generate high performance code and 3) the performance is much less sensitive to the latency and scheduling parameters.

@@ -18,7 +18,7 @@
   \caption{Capri-based \atl design diagram}
 \end{figure*}
 
-As mentioned in the motivation section, the orthogonal searching strategy used
+As mentioned in the motivation section, the orthogonal searching strategy used in 
 \atl is quite problematic. It can only generate good results for some platforms
 and the install process is slow. The high level idea to speed up \atl
 optimization process as well as improving \gem performance is to replace the
@@ -44,11 +44,11 @@ The detailed design are descried in the following for subsections.
   As mentioned in Section~\ref{sec:atlas_intro}, \atl optimizes a set of knobs
   including {$NB$, $MU$, $NU$, $KU$, $L_s$, $FMA$, $F_F$, $I_F$, $N_F$} by
   using orthogonal search. Altogether there are 9 knobs here. $NB$, $MU$, $NU$
-  and $KU$ have roughly 10$\sim$20 configurateable settings respectively, $L_s$,
+  and $KU$ have roughly 10$\sim$20 configurable settings respectively, $L_s$,
   $F_F$, $I_F$ and $N_F$ have roughly 5$\sim$10 different settings respectively.
   $FMA$ has 2 settings. If all knobs are considered in the offline profiling
   process, the searching space is over 100 million for one platform, which is
-  obviously inapplicatable in reality. Based on some careful study of the
+  obviously inapplicable in reality. Based on some careful study of the
   effect of knobs on \gem performance, we found out that only $NB$, $MU$, $NU$
   and $KU$ has significant effect on the performance, while other knobs only
   have minor($\sim$10\%) effect. Therefore, we choose $NB$, $MU$, $NU$ and $KU$
@@ -58,11 +58,11 @@ The detailed design are descried in the following for subsections.
   \subsection{Feature selection}
   \label{sec:features}
   Features are used in Capri as the identification for different inputs. In this
-  project, obviously platform features affects a lot. For example, processers
+  project, obviously platform features affects a lot. For example, processors
   from \emph{Intel, ARM} or \emph{AMD} performs really differently even with
   the some clock frequency. Or another example, performance on MAC OS and Linux
   are very different because the compiler used to generate code is very
-  different. By inspecting \atl configurate step, we choose 6 featues as the
+  different. By inspecting \atl configuration step, we choose 6 features as the
   indicators of one platform. We cannot tell the exact effect of each feature
   but the machine learning model can.
   \begin{itemize}
@@ -107,7 +107,7 @@ The detailed design are descried in the following for subsections.
   generate the executable.
 
   \subsection{Machine Learning Model}
-  \label{sec:maching_learning_model}
+  \label{sec:matching_learning_model}
   There different kinds of machine learning model implemented in Capri. In
   thie paper, we mainly choose three decision tree style model, which are
   M5~\cite{quinlan1992learning}, bagging predictor~\cite{breiman1996bagging}

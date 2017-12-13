@@ -14,7 +14,7 @@ the search on 12960 data points.\par
 
 We evaluate the result on 12 platform, as shown in Figure \ref{fig:platforms}. \textit{arma7} and \textit{arma15}
 are two ARM Cortex processors on an ODROID board. 
-\textit{ypei\_mac} and \textit{michael\_mac} are two perfernal MAC laptops 
+\textit{ypei\_mac} and \textit{michael\_mac} are two personal MAC laptops 
 with Intel CORE i7 processors. The rest eight platforms are machines of ICES or CS department. They are all intel processors.\par
 
 Note that the third column \textit{architecture} is a category provided by ATLAS configuration. 
@@ -35,12 +35,12 @@ We adopt it as one of our training set grouping metric in the experiment.\par
 
 In the experiment, we train the model offline from a training set of platforms, and get the top ten knob settings generated from the model.
 We evaluate these ten knob settings on another target platform and compare it with the best of exhaustive search. We select 
-three catogories of training sets. 1) ALL except the target. 2) "Corei" architecture group. This group is all the platforms 
-with intel precessors except \textit{ypei\_mac} since ATLAS is unable to identify its architecture. 3) Specific architecture group.
-We categorize the platform spcifically according to the architure. Each artchiture conresponds to a group and we only use data 
-from the exact same architure to train. \par
+three categories of training sets. 1) ALL except the target. 2) "Corei" architecture group. This group is all the platforms 
+with intel processors except \textit{ypei\_mac} since ATLAS is unable to identify its architecture. 3) Specific architecture group.
+We categorize the platform specifically according to the architecture. Each architecture corresponds to a group and we only use data 
+from the exact same architecture to train. \par
 
-We picked 3 different models M5, bagging predictor and extremely randomized tree from capri. We evaluate each training model on each training 
-set individually.
+We picked 3 different models M5, bagging predictor and extremely randomized tree from Capri. We evaluate each training model on each training 
+set individually on two metrics: throughput (MFLOPS) of 
 
 
