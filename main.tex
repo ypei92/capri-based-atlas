@@ -111,7 +111,7 @@ There are two main approaches in auto-tuning: empirical search and model-based.
 Empirical search is universal but slow, and some heuristic to reduce search space may prune out best solutions.
 Model-based auto-tuning predicts the best parameters by platform abstractions but the performance can degrade.
 \par
-ATLAS uses orthogonal line search to find optimal parameters.
+ATLAS adopts orthogonal line search to find optimal parameters.
 The search takes a long time and the space is not guaranteed to include the optimal points.
 In this project, we introduce Capri-based ATLAS search, to reduce the search time and achieve high performance simultaneously.
 Capri first takes the results of exhaustive search and trains them offline. During the ATLAS code generation, it provides candidate parameters for ATLAS to run on the platform and pick the best.
