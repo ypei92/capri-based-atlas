@@ -4,14 +4,51 @@
   \subsection{Exhaustive search vs \atl orthogonal search}
   \label{sec:exhaustiveVSorthogonal}
 
+  \begin{figure*}[tbhp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/exhaustiveVsorthogonal.png}
+    \caption{Searching time comparison between exhaustive search and \atl orthogonal search}
+    \label{fig:exhaustiveVsorthogonal}
+  \end{figure*}
+
   \subsection{GEMM performance model}
   \label{sec:GEMMperf}
 
   \subsection{Capri-based ATLAS searching time}
   \label{sec:capri_atlas_searching}
 
+  \begin{figure*}[tbhp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/timespeedup.png}
+    \caption{Capri-based ATLAS searching time speedup}
+    \label{fig:platforms}
+  \end{figure*}
+
   \subsection{Capri-based ATLAS performance}
   \label{sec:capri_atlas_performance}
+
+  \begin{figure*}[tbhp]
+    \centering
+    \begin{subfigure}[b]{1.0\linewidth}
+      \centering
+      \includegraphics[width=0.9\textwidth]{images/all_perf.png}
+      \caption{Training set contains all the platforms except the testing platform}
+      \label{fig:all_perf}
+    \end{subfigure}
+    \begin{subfigure}[b]{1.0\linewidth}
+      \centering
+      \includegraphics[width=0.9\textwidth]{images/corei_perf.png}
+      \caption{Training set contains all the ``corei'' architecture platforms except the testing platform}
+      \label{fig:corei_perf}
+    \end{subfigure}
+    \begin{subfigure}[b]{1.0\linewidth}
+      \centering
+      \includegraphics[width=0.9\textwidth]{images/specific_perf.png}
+      \caption{Training set contains all the specific platforms except the testing platform}
+      \label{fig:specific_perf}
+    \end{subfigure}
+  \caption{Capri-based \atl design diagram}
+  \end{figure*}
 
   \subsection{Parameter sensitivity}
   \label{sec:parametersensitivity}
