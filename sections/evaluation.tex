@@ -3,51 +3,87 @@
 
   \subsection{Exhaustive search vs \atl orthogonal search}
   \label{sec:exhaustiveVSorthogonal}
-    In this section, we compare the result of \atl orthogonal search with the best of exhaustive
-    search. The search time, generated code performance, and selected parameters are listed in Figure
-    \ref{fig:exhaustiveVsorthogonal}.\par
-    Except for the two ARM processors, it takes around one to three minutes for ATLAS orthogonal search 
-    to generate its best code. Considering that we only search for single precision, real number general 
-    matrix multiplication, we haven't run double precision, complext number or some other benchmarks 
-    like transpose matrix kernel, matrix vector kernel, big matrix kernel, rank-1 matrix kernel etc, installing 
-    ATLAS may take hours to finish. The orthogonal search is still too slow to end user.\par
-    Column \textit{exhaustive best} and \textit{ATLAS best} list the FMLOPS performance of generated code from
-    both search strategy. The ratio of ATLAS over exhaustive is in the last column. On 8 platforms, 
-    ATLAS is able to generate code with >90\% of best performance. Three platforms has only around 60\% of 
-    best performance. The two parameter columns list the selected paraeters in the order of $(NB, MU, NU, KU)$.\par
-    Note for the two MAC platform that, the two middle parameters (MU, NU) are so large that it exceeds 
-    the register requirement of \[ MU*NU + MU + NU + LS < NR \]. Thus ATLAS orthogonal search is not able 
-    to find it. Currently we do not have a clear explanation to this. One guess is that, the CORE i7 processors
-    have more physical registers than ISA architecture register. The ISA is only able to use or identify 32 registers.
-    However due to register renaming, it can make use of more than 32 registers and the extra registers are not visible 
-    to softwares.\par
-     
-
-
-
   \begin{figure*}[tbhp]
     \centering
     \includegraphics[width=0.9\textwidth]{images/exhaustiveVsorthogonal.png}
     \caption{Searching time comparison between exhaustive search and \atl orthogonal search}
     \label{fig:exhaustiveVsorthogonal}
   \end{figure*}
+  In this section, we compare the result of \atl orthogonal search with the best of exhaustive
+  search. The search time, generated code performance, and selected parameters are listed in Figure
+  \ref{fig:exhaustiveVsorthogonal}.\par
+  Except for the two ARM processors, it takes around one to three minutes for ATLAS orthogonal search
+  to generate its best code. Considering that we only search for single precision, real number general
+  matrix multiplication, we haven't run double precision, complext number or some other benchmarks
+  like transpose matrix kernel, matrix vector kernel, big matrix kernel, rank-1 matrix kernel etc, installing
+  ATLAS may take hours to finish. The orthogonal search is still too slow to end user.\par
+  Column \textit{exhaustive best} and \textit{ATLAS best} list the FMLOPS performance of generated code from
+  both search strategy. The ratio of ATLAS over exhaustive is in the last column. On 8 platforms,
+  ATLAS is able to generate code with >90\% of best performance. Three platforms has only around 60\% of
+  best performance. The two parameter columns list the selected paraeters in the order of $(NB, MU, NU, KU)$.\par
+  Note for the two MAC platform that, the two middle parameters (MU, NU) are so large that it exceeds
+  the register requirement of \[ MU*NU + MU + NU + LS < NR \]. Thus ATLAS orthogonal search is not able
+  to find it. Currently we do not have a clear explanation to this. One guess is that, the CORE i7 processors
+  have more physical registers than ISA architecture register. The ISA is only able to use or identify 32 registers.
+  However due to register renaming, it can make use of more than 32 registers and the extra registers are not visible
+  to softwares.\par
 
   \subsection{GEMM performance model}
   \label{sec:GEMMperf}
-  \begin{figure}[tbhp]
+  This section discuss whether it is easy to build a model of \gem performance
+  given platform information and a knob setting. Intuitively, we evaluate
+  whether the \gem performance is predictable. In Fig.\ref{fig:inertia_perf},
+  we shows the performance prediction accuracy on platform inertia using a model
+  trained by M5 on the other 11 platforms. Each point represent one knob
+  setting. This figure shows the comparison between the normalized actual
+  performance and the predicted performance. There are two views to evaluate
+  this figure. The first view is to see the distance between the points to the
+  $y=x$ line. The distance evaluates how accurate the model is.
+
+  Another point of
+  view is to focus on the few highest data points, which are the points in the
+  red oval in Fig.\ref{fig:inertia_perf}. These points represent the highest
+  predicted performance, which will be selected as the candidate knob settings
+  in \atl evaluation. The corresponding x axis value is the actual performance
+  number for this knob setting. Intuitively, the lefter the point is, the
+  better the prediction is, we want high prediction to indicate high actual
+  performance. Note that only the knob settings with high performance are
+  interested, so the prediction accuracy for low points doesn't matter much in
+  this case as soon as high prediction point are left enough.
+
+  Inertia is doing well in both of the views, while platforms like arma7 is not
+  because it's really hard to use data collected from 10 Intel processors and 1
+  ARM processor to predict another ARM processor's performance, as shown in
+  Fig.\ref{fig:arm_perf}. The overall performance prediction, shown in
+  Fig.\ref{fig:overall_perf}, is generated by randomly selecting 80\% and 20 \%
+  of the data set formed by 12 platforms as training data and testing data
+  respectively. It shows the overall difficulty of modeling \gem performance
+  is not hard.
+
+  \begin{figure}[bhp]
     \centering
-    \includegraphics[width=0.4\textwidth]{images/overall_model.png}
-    \caption{Overall performance model}
-    \label{fig:overall_model}
+    \begin{subfigure}[b]{1.0\linewidth}
+      \centering
+      \includegraphics[width=0.8\textwidth]{images/inertia_perf.png}
+      \caption{Inertia performance prediction}
+      \label{fig:inertia_perf}
+    \end{subfigure}
+    \begin{subfigure}[b]{1.0\linewidth}
+      \centering
+      \includegraphics[width=0.8\textwidth]{images/arm_perf.png}
+      \caption{Arma7 performance prediction}
+      \label{fig:arm_perf}
+    \end{subfigure}
+    \begin{subfigure}[b]{1.0\linewidth}
+      \centering
+      \includegraphics[width=0.8\textwidth]{images/overall_model.png}
+      \caption{Overall performance prediction}
+      \label{fig:overall_pref}
+    \end{subfigure}
   \end{figure}
 
-  \begin{figure}[tbhp]
-    \centering
-    \includegraphics[width=0.4\textwidth]{images/inertia_perf.png}
-    \caption{Inertia performance accuracy}
-    \label{fig:inertia_perf}
-  \end{figure}
 
+  
   \subsection{Capri-based ATLAS searching time}
   \label{sec:capri_atlas_searching}
   In this section we compare one of our evaluation metric: searching time. An overview of the result is listed in
