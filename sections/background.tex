@@ -3,8 +3,13 @@
 
   \subsection{ATLAS code generator}
   \label{sec:atlas_intro}
+  ATLAS uses orthogonal line search to auto-tune its optimization parameters.
+  It assumes that the parameters are independent to performance and the optimal values can be
+  restricted by some architecture features like number of registers, size of L1 cache.
+  Even though ATLAS empirical can generate good parameters, its search space is still not guaranteed to contain
+  the optimal point, and there are still many low performance points in the search space which is unnecessary
+  to search.
 
   \subsection{Capri approximation program}
   \label{sec:Capri_intro}
-  There is growing interest in approximate computing as a way of reducing the
-  energy and time required to execute applications[].
+  a
