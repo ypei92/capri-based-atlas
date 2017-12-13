@@ -10,6 +10,57 @@
   the optimal point, and there are still many low performance points in the search space which is unnecessary
   to search.
 
-  \subsection{Capri approximation program}
+  \subsection{Capri approximate program}
   \label{sec:Capri_intro}
-  a
+  Capri is a approximate program that helps trade off energy or time with error
+  or performance for input programs. Capri focuses on a class of approximate
+  programs that we call tunable approximate programs. Intuitively, these
+  programs have one or more knobs that can be changed to vary the fidelity of
+  produced output. These knobs might control the number of iterations performed
+  by a loop \cite{}, determine the precision with which floating-point
+  computations are performed \cite{}, and so on.
+
+  There is now a fairly large literature on this subject. Most of these work
+  address the solution for \emph{forward problems}: they show that for some
+  programes, particular techiques or heuristics can be applied to degrade
+  output quality in an acceptable way while reducing energy or running time.
+  Another category of approximate problem is called \emph{
+  inverse problems}: given some constraint on output quality, how shall we set
+  the knobs in order to meet the output quality while reducing the cost (running
+  time or error) as much as possible. What makes an approximate problem
+  particularly difficult is that for most applications, optimal values of
+  knob settings are very dependent on values of inputs. Capri is capable of
+  doing both of them as well as the variant introduced by inputs.
+
+  The work flow for Capri can be divided into two phases: training
+  phase, testing phase. The training phase is conducted
+  offline. Basically, Capri requires the target approximate problem to run
+  extensively across the knob space for some inputs and collect cost(running
+  time, energy) and error (output quality or perfermance degradation). A set of
+  knob-cost and knob-error pairs are formed for each input. For each input, some
+  features are extracted in order to represent the input. These sets of
+  knob-cost and knob-error pairs with their input features are fed into
+  machine learning boxes in order to build a cost model and a error model
+  respectively based on input features and different knob settings.
+
+  During the test phase, Capri would take a
+  constraint and an input for the target program as inputs, such as ``a knob
+  settings which is 90\% as good as the best rendering quality'', the
+  controller would consult the error model and find out
+  all the knob settings that is predicted as at least 90\% as good as the best
+  one, denoted as feasible region of knobs. Then, the Capri consults the
+  cost model for each knob in the feasible region and output the knob setting
+  with the least cost. This knob setting with be used for this specific input
+  that is predicted to produce a 90\% good result with the least cost.
+
+  The offline training phase is heavy but the online testing phase is really
+  light, which usually take few seconds to finish. In this project, Capri would
+  be used to build the model for \gem performance based on knobs in the code on
+  different platforms. \atl would take the advantage of this model to prune
+  the optimization exploration space and produce an ``enough good'' \gem
+  installation.
+
+
+  %Auto-tuning is a generally used optimization process, which is also
+  %approximateable. Intuitively, instead of replacing auto-tuning completely,
+  %the process of auto-tunning can be shortened by pruning the search space.
