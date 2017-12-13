@@ -6,12 +6,7 @@
   The ATLAS (Automatically Tuned Linear Algebra Software) is a software focusing on high performance 
   BLAS (Basic Linear Algebra Subprograms) on different platforms. It applies both empirical search and model-based 
   tuning in order to provide portable performance. \par
-  ATLAS's empirical technique adopts orthogonal line search to auto-tune its optimization parameters.
-  It assumes that the parameters are independent to performance and the optimal values can be
-  restricted by some architecture features like number of registers, size of L1 cache.
-  Even though ATLAS empirical can generate good parameters, its search space is still not guaranteed to contain
-  the optimal point, and there are still many low performance points in the search space which is unnecessary
-  to search.
+  
 
   \begin{figure}
   \centering
@@ -19,16 +14,49 @@
     \centering
     \includegraphics[width=0.9\textwidth]{images/ATLAS_code.png}
     \caption{}
+    \label{fig:ATLAS_code}
   \end{subfigure}
   \begin{subfigure}[t]{1.0\linewidth}
     \centering
     \includegraphics[width=0.9\textwidth]{images/ATLAS_pic.png}
     \caption{}
+    \label{fig:ATLAS_pic}
   \end{subfigure}
   \caption{Matrix multiplication tiled for L1 data cache and registers}
-  \label{fig:design}
+  \label{fig:ATLAS}
 \end{figure}
 
+  Figure \ref{fig:ATLAS} (adopted from \cite{yotov2005search}) shows the kernel code and pictorial view of matrix multiplication 
+  blocking for L1 cache and registers. The kernel computes matrix product $C=A*B$. It first optimizes for L1 cache, by tiling all three matrices
+  to three $NB*NB$ square matrices, as shown in Figure \ref{fig:ATLAS_pic}. Then it optimizes for registers by further dividing them  
+  into an $MU*1$ submatrix of $A$ and an $NU*1$ submatrix of $B$ and accumulate the result into an $MU*NU$ submatrix of $C$. 
+  Furthermore, it is profitable to unroll the last dimension by a factor of $KU$.
+  In the above three steps, four optimization parameters $NB$, $MU$, $NU$ and $KU$ are significant to the performance. \par
+
+  ATLAS also search the optimal values of other parameters like $LS$, the latency for computation scheduling, $IF$, $FF$, $NF$, three fetching parameters 
+  for load scheduling. For now, we only consider the tiling and unrolling parameters \textbf{\textit{NB}}, \textbf{\textit{MU}}, \textbf{\textit{NU}} and \textbf{\textit{KU}} since 1) the exhaustive search space of them 
+  is already very huge which typically takes us more than ten hours to generate training data, and 2) the model built from these four parameters are already able to
+  generate high performance code and 3) the performance is much less sensitive to the latency and scheduling parameters.
+  \par
+  
+  ATLAS's empirical technique adopts orthogonal line search to auto-tune its optimization parameters. 
+  It assumes that the parameters are independent and their optimal values are not relevant to each other. The optimal values can be
+  restricted by some architecture features like number of registers, size of L1 cache.\par
+  More specifically, it first searches $(MU, NU)$ pairs which meets the register requirement
+  \[ MU*NU + MU + NU + LS < NR \]
+  where NR is the number of floating point registers.\par
+  Then it searches NB, which is the multiple of four in the range of 
+  \[ [max(20, \sqrt{\frac{C}{3}}), min(80, \sqrt{C}) ] \]
+  where C is the size of L1 cache. 
+  Finally, it searches KU in the set of 
+  \[ \{1, 2, 4, 6, 8, 12, 16, 20, 24, 28, 32, \frac{NB}{2}, NB \} \]
+
+  Even though ATLAS empirical can generate good parameters, its search space is still not guaranteed to contain
+  the optimal point, and there are still many low performance points in the search space which is unnecessary
+  to search. To give the reader a general sense of the result of ATLAS search, on a typical platform with Intel Xeon 
+  CPU E5-2630 2.3GHz, which has 16 floating point registers and 32kb L1 cache, it takes ATLAS 118s to search 34 data 
+  points in the $NB\times MU \times NU \times KU$ space and the MFLOPS performance of generated program is 94\% of the 
+  best of exhaustive search in the same space. 
 
 
   \subsection{Capri approximate program}
@@ -43,7 +71,7 @@
 
   There is now a fairly large literature on this subject. Most of these work
   address the solution for \emph{forward problems}: they show that for some
-  programes, particular techiques or heuristics can be applied to degrade
+  programs, particular techniques or heuristics can be applied to degrade
   output quality in an acceptable way while reducing energy or running time.
   Another category of approximate problem is called \emph{
   inverse problems}: given some constraint on output quality, how shall we set
@@ -57,7 +85,7 @@
   phase, testing phase. The training phase is conducted
   offline. Basically, Capri requires the target approximate problem to run
   extensively across the knob space for some inputs and collect cost(running
-  time, energy) and error (output quality or perfermance degradation). A set of
+  time, energy) and error (output quality or performance degradation). A set of
   knob-cost and knob-error pairs are formed for each input. For each input, some
   features are extracted in order to represent the input. These sets of
   knob-cost and knob-error pairs with their input features are fed into
