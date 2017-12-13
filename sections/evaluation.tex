@@ -82,7 +82,7 @@
       \caption{Overall performance prediction}
       \label{fig:overall_perf}
     \end{subfigure}
-    \caption{Performance prediction accuacy overview}
+    \caption{Performance prediction accuracy overview}
   \end{figure}
 
 
@@ -112,14 +112,14 @@
   search since searching time of Capri-based \atl has been significantly
   shortened. For each platform, we use the data of the rest 11 platforms to
   perform the training and build the model. In the testing phase, top 10
-  knob setting with the highest predicted preformance are extracted from the
+  knob setting with the highest predicted performance are extracted from the
   model. For this 10 points, the point with the highest actual performance is
   selected as the final knob setting for code generation. The gap between the
   actual performance of this final knob setting and the actual best performance
   given by the exhaustive search is the performance degradation of the
   Capri-based \atl. Performance degradation numbers are displayed in
   Fig.\ref{fig:all_perf}, using 3 different machine learning models. The bars
-  represent the performance ratio compared to exhaustive search's, the higher
+  represent the performance ratio compared to exhaustive search, the higher
   the better. For most of the Intel based processors, the performance ratio is
   close to 100\% for bagging predictor and randomized trees. The overall
   performance ratio is 84\%, 95\%, 95\% when using M5, bagging and randomized
@@ -157,7 +157,7 @@
   \subsection{System sensitivity}
   \label{sec:system_sensitivity}
     The sensitivity of our system should also be evaluated to test its
-    practiality. Besides machine learning model selection, two other aspects
+    practicality. Besides machine learning model selection, two other aspects
     are considered: the influence of training set choice and ``top M''
     constraint.
 
