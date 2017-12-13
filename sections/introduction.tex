@@ -4,7 +4,7 @@
 
 Optimization parameters such as tile sizes and loop unrolling factors are critical to performance and it
 is crucial to estimate the optimal value during optimization.
-Currently programmers usually rely on optimization techiques provided by traditional compilers, which
+Currently programmers usually rely on optimization techniques provided by traditional compilers, which
 is often too generalized to produce desired performance.
 General compiler techniques cannot take care of applications such as general matrix multiply(GEMM),
 whose performance is heavily based on those optimization parameters.
@@ -29,7 +29,7 @@ sparse linear algebra \cite{vuduc2005oski}, signal processing
 \cite{frigo2005design}\cite{puschel2005spiral}, sorting \cite{li2004dynamically},
 general stencil operations \cite{kamil2010auto}, etc.
 \par
-However, exaustively searching the whole parameter space is slow and impractical.
+However, exhaustively searching the whole parameter space is slow and impractical.
 The search space is usually too large for modern machines and contains lots of low performance points where
 searching is unnecessary. Consequently, most proposed searching methods
 prune the space with hard-coded heuristics and may lose generality on new platforms.
@@ -38,7 +38,7 @@ prune the space with hard-coded heuristics and may lose generality on new platfo
 The second approach of auto-tuning is model-based tuning, which builds an analytical model
 to estimates optimal parameters. The significant advantage of such approach is fast. Good optimization
 parameters can be directly derived from the analytical model.
-However in practice, it is generally difficult to build a highly accurate analytical model bacause of the growing complexity
+However in practice, it is generally difficult to build a highly accurate analytical model because of the growing complexity
 of modern architectures and applications. The analytical model is inflexible and has to be built by expert of both architecture
 and application.
 
@@ -61,8 +61,8 @@ However, in many problem domains, it is sufficient to produce an good ``enough''
 result: for example, when rendering a image in graphics, it is
 acceptable to take computational short-cuts if the graph doesn't hurt user's
 experience. In addition, since analytical models are often imprecise for
-applicatons with high complexity. Machine learning models can be a great
-subsitute. In this paper, we use Capri\cite{sui2016proactive}, a published
+applications with high complexity. Machine learning models can be a great
+substitute. In this paper, we use Capri\cite{sui2016proactive}, a published
 approximate program, to build machine learning based models for \gem performance
 based on different parameter settings. We denote parameter settings as knobs in
 our paper. Capri would take past \atl running data and produce a machine
@@ -84,9 +84,9 @@ while the original \atl suffers 13\% performance degradation.
 \par
 The rest of this paper is organized as follows. Section \ref{sec:background} describes the background of ATLAS
 orthogonal line search and Capri approximate system
-Section \ref{sec:moti} adddresses our motivation for this project.
+Section \ref{sec:moti} addresses our motivation for this project.
 Section \ref{sec:design} introduces the implementation of Capri-based ATLAS search.
 Section \ref{sec:experiment} provides the details of experiment methodology.
 Section \ref{sec:evaluation} shows all the experiment results of our system, analyze and compare them with ATLAS orthogonal search.
 Section \ref{sec:related} provides an overview of related work.
-And finally, section \ref{sec:conclusion} concldes and outlines our possible future work.
+And finally, section \ref{sec:conclusion} concludes and outlines our possible future work.
