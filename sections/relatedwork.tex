@@ -6,13 +6,29 @@ There are many heuristics on pruning the searching space and improving performan
 ATLAS\cite{yotov2005search} uses orthogonal to reduce the search space. It assumes that 
 the optimization parameters are independent to each other and they are restricted by some hardware features.
 However as we have seen in the experiment, the assumption is not always true and its generated code
-may have low performance. FFTW\cite{frigo2005design} adopts dynamic programming where program of large size problem
+may have low performance. A similar technique \cite{li2009note} is later implemented on GPU to keep up
+with rapid change in hardware. FFTW\cite{frigo2005design} adopts dynamic programming where program of large size problem
 is constructed from previously generated code for small size. The inherent assumption of dynamic programming is that,
 the best code of a transform is independent of the calling context. This assumption holds for the arithmetic cost (which implies
 that DP produces the optimal solution), but not for the runtime of transform algorithms.
 SPIRAL\cite{puschel2005spiral} not only adopts dynamic programs,
 but also tries exhaustive search, random search, evolutionary search and hill climbing heuristic. The property 
-of evolutionary search and hill climbing makes the generated solution may be local optimal.
+of evolutionary search and hill climbing makes the generated solution may be local optimal. \par
+
+Model-driven auto-tuning is another approach. ATLAS\cite{yotov2005search} adops a model from a heuristic based on
+hardware parameters. SPIRAL\cite{puschel2005spiral} build and learn a model from the features a nodes in the divide-and-conquer tree.
+The feature must be carefully selected and the built model shows 10\% to 20\% performance loss. \par
+
+It requires expertise on both hardware architectures and applications to build an accurate model. Therefore a lot of 
+effort has been spent in using machine-learning to automatically learn a model. Li et al.\cite{li2004dynamically} apply machine learning 
+technique to build a model for sorting. The machine learning technique predicts the best algorithm as a function of the 
+characteristics of the input data set and the performance of the difference algorithms on the target platform. Falch at al.\cite{falch2015machine}
+focuses on OpenCL which targets on heterogeneous system and often suffers from performance portability. They run on a random
+subset of the entire tuning parameter space, and the results are used to build an artificial neural network based model. 
+The model can be used to find interesting parts of the parameter space for further search. Yigitbasi et al.\cite{yigitbasi2013towards} focus on MapReduce.
+They selected support vector regression model(SVR) as the most accurate machine learning model among several candidates, by 
+training them with diverse MapReduce applications and cluster configurations. Bergstra et al.\cite{bergstra2012machine} build a machine learning model
+with boosted regression tree and generate high performance library on multicore GPU platforms.
 
 
 

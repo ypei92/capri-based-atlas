@@ -14,13 +14,13 @@
   \ref{fig:exhaustiveVsorthogonal}.\par
   Except for the two ARM processors, it takes around one to three minutes for ATLAS orthogonal search
   to generate its best code. Considering that we only search for single precision, real number general
-  matrix multiplication, we haven't run double precision, complext number or some other benchmarks
+  matrix multiplication, we haven't run double precision, complex number or some other benchmarks
   like transpose matrix kernel, matrix vector kernel, big matrix kernel, rank-1 matrix kernel etc, installing
   ATLAS may take hours to finish. The orthogonal search is still too slow to end user.\par
-  Column \textit{exhaustive best} and \textit{ATLAS best} list the FMLOPS performance of generated code from
+  Column \textit{exhaustive best} and \textit{ATLAS best} list the MFLOPS performance of generated code from
   both search strategy. The ratio of ATLAS over exhaustive is in the last column. On 8 platforms,
   ATLAS is able to generate code with >90\% of best performance. Three platforms has only around 60\% of
-  best performance. The two parameter columns list the selected paraeters in the order of $(NB, MU, NU, KU)$.\par
+  best performance. The two parameter columns list the selected parameters in the order of $(NB, MU, NU, KU)$.\par
   Note for the two MAC platform that, the two middle parameters (MU, NU) are so large that it exceeds
   the register requirement of \[ MU*NU + MU + NU + LS < NR \]. Thus ATLAS orthogonal search is not able
   to find it. Currently we do not have a clear explanation to this. One guess is that, the CORE i7 processors
@@ -78,7 +78,7 @@
       \centering
       \includegraphics[width=0.8\textwidth]{images/overall_model.png}
       \caption{Overall performance prediction}
-      \label{fig:overall_pref}
+      \label{fig:overall_perf}
     \end{subfigure}
   \end{figure}
 
@@ -89,7 +89,7 @@
   In this section we compare one of our evaluation metric: searching time. An overview of the result is listed in
   Figure \ref{fig:search_time}. The \textit{ATLAS search time} column is the same as in Figure \ref{fig:exhaustiveVsorthogonal}.
   \textit{Capri search time} shows the time Capri takes to purely generate top candidates without running them. 
-  \textit{Capri runtime per candicates} is the average time of each candidate running on the actual platform.
+  \textit{Capri runtime per candidates} is the average time of each candidate running on the actual platform.
   Therefore, total Capri-based ATLAS search time which is the sum of \textit{Capri search time} and actual platform time of the candidates,
   highly depends on how many candidates that the user wants. The last two columns show the speedup over ATLAS when users pick
   10 or 5 candidates. On average, Capri-based search outperforms ATLAS orthogonal search by \textbf{10.88X} on 10 candidates and \textbf{17.97X} on 
