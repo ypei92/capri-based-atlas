@@ -1,2 +1,10 @@
 \section{Experiment Methodology}
 \label{sec:experiment}
+
+In the experiment, we only consider single precision, real number matrix multiplication. We implement 
+an exhaustive search on ATLAS. The space of each parameter in $NB$, $MU$, $NU$, $KU$ are not smaller 
+than the ATLAS orthogonal search, and the exhaustive search tries every possible combination of them. 
+On a typical platform as we mentioned in Section \ref{atlas_intro}, it takes more than 10 hours to finish 
+the search on 12960 points. 
+
+
