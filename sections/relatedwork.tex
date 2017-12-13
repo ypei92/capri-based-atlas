@@ -1,2 +1,19 @@
 \section{Related Work}
 \label{sec:related}
+
+There are many heuristics on pruning the searching space and improving performance of auto-tuning.
+
+ATLAS\cite{yotov2005search} uses orthogonal to reduce the search space. It assumes that 
+the optimization parameters are independent to each other and they are restricted by some hardware features.
+However as we have seen in the experiment, the assumption is not always true and its generated code
+may have low performance. FFTW\cite{frigo2005design} adopts dynamic programming where program of large size problem
+is constructed from previously generated code for small size. The inherent assumption of dynamic programming is that,
+the best code of a transform is independent of the calling context. This assumption holds for the arithmetic cost (which implies
+that DP produces the optimal solution), but not for the runtime of transform algorithms.
+SPIRAL\cite{puschel2005spiral} not only adopts dynamic programs,
+but also tries exhaustive search, random search, evolutionary search and hill climbing heuristic. The property 
+of evolutionary search and hill climbing makes the generated solution may be local optimal.
+
+
+
+
