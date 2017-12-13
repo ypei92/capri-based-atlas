@@ -37,12 +37,22 @@
 
   \subsection{Capri-based ATLAS searching time}
   \label{sec:capri_atlas_searching}
+  In this section we compare one of our evaluation metric: searching time. An overview of the result is listed in
+  Figure \ref{fig:search_time}. The \textit{ATLAS search time} column is the same as in Figure \ref{fig:exhaustiveVsorthogonal}.
+  \textit{Capri search time} shows the time Capri takes to purely generate top candidates without running them. 
+  \textit{Capri runtime per candicates} is the average time of each candidate running on the actual platform.
+  Therefore, total Capri-based ATLAS search time which is the sum of \textit{Capri search time} and actual platform time of the candidates,
+  highly depends on how many candidates that the user wants. The last two columns show the speedup over ATLAS when users pick
+  10 or 5 candidates. On average, Capri-based search outperforms ATLAS orthogonal search by \textbf{10.88X} on 10 candidates and \textbf{17.97X} on 
+  5 candidates. On the two ARM platforms, Capri-based search can even reach more than 200X speedup.
+  
+
 
   \begin{figure*}[tbhp]
     \centering
     \includegraphics[width=0.9\textwidth]{images/timespeedup.png}
     \caption{Capri-based ATLAS searching time speedup}
-    \label{fig:platforms}
+    \label{fig:search_time}
   \end{figure*}
 
   \subsection{Capri-based ATLAS performance}
