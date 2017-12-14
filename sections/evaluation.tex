@@ -16,7 +16,7 @@
   to generate its best code. Considering that we only search for single precision, real number general
   matrix multiplication, we haven't run double precision, complex number or some other benchmarks
   like transpose matrix kernel, matrix vector kernel, big matrix kernel, rank-1 matrix kernel etc, installing
-  ATLAS may take hours to finish. The orthogonal search is still too slow to end user.\par
+  ATLAS may take hours to finish. The orthogonal search is still too slow for end users.\par
   Column \textit{exhaustive best} and \textit{ATLAS best} list the MFLOPS performance of generated code from
   both search strategy. The ratio of ATLAS over exhaustive is in the last column. On 8 platforms,
   ATLAS is able to generate code with >90\% of best performance. Three platforms has only around 60\% of
@@ -30,7 +30,7 @@
 
   \subsection{GEMM performance model}
   \label{sec:GEMMperf}
-  This section discuss whether it is easy to build a model of \gem performance
+  This section discusses whether it is easy to build a model of \gem performance
   given platform information and a knob setting. Intuitively, we evaluate
   whether the \gem performance is predictable. In Fig.\ref{fig:inertia_perf},
   we shows the performance prediction accuracy on platform inertia using a model
@@ -100,8 +100,9 @@
   Figure \ref{fig:search_time}. The \textit{ATLAS search time} column is the same as in Figure \ref{fig:exhaustiveVsorthogonal}.
   \textit{Capri search time} shows the time Capri takes to purely generate top candidates without running them.
   \textit{Capri runtime per candicates} is the average time of each candidate running on the actual platform.
-  Therefore, total Capri-based ATLAS search time which is the sum of \textit{Capri search time} and actual platform time of the candidates,
-  highly depends on how many candidates that the user wants. The last two columns show the speedup over ATLAS when users pick
+  Therefore, total Capri-based ATLAS search time which is the sum of \textit{Capri search time} and actual running time of all the candidates,
+  which is
+  highly dependent on how many candidates that the user wants. The last two columns show the speedup over ATLAS when users pick
   10 or 5 candidates. On average, Capri-based search outperforms ATLAS orthogonal search by \textbf{10.88X} on 10 candidates and \textbf{17.97X} on
   5 candidates. On the two ARM platforms, Capri-based search can even reach more than 200X speedup.
 
@@ -112,7 +113,7 @@
   search since searching time of Capri-based \atl has been significantly
   shortened. For each platform, we use the data of the rest 11 platforms to
   perform the training and build the model. In the testing phase, top 10
-  knob setting with the highest predicted performance are extracted from the
+  knob settings with the highest predicted performance are extracted from the
   model. For this 10 points, the point with the highest actual performance is
   selected as the final knob setting for code generation. The gap between the
   actual performance of this final knob setting and the actual best performance
@@ -178,13 +179,15 @@
     of ``corei'' group is given in Fig.\ref{fig:corei_perf}. In addition, we
     also tried more specific training groups whose architectures are the same or
     the compiler settings are the same. The specific groups choice and
-    performance number is included in Fig.\ref{fig:specific_perf}. The overall
+    performance number is included in Fig.\ref{fig:specific_perf} with orange
+    rectangles. The overall
     performance ratio is 95\%, 96\%, 96\% respectively for specific group cases,
     which has 9\%, 1\%, 1\% performance ratio improvements.
 
     Note that in Fig.\ref{fig:all_perf} and \ref{fig:specific_perf}, the last
-    column shows the geomean only for the 8 ``corei'' platforms (for fair
-    comparison with Fig.\ref{fig:corei_perf}). For bagging and randomized
+    column shows the geomean only for the 8 ``corei'' platforms (in order to
+    have fair comparison with the geomean in Fig.\ref{fig:corei_perf}). For
+    bagging and randomized
     trees, the performance doesn't have much difference. However, there is a
     performance boost in Fig.\ref{fig:specific_perf} because more suitable
     training set is selected. There is no performance ratio improvements in
@@ -192,9 +195,9 @@
     the same characteristics as ``corei'' group's.
 
     To be more intuitive, we show Fig.\ref{fig:ypei_perf_change} to demonstrate
-    the difference of choosing different training set. The left one is from
+    the impact of choosing different training set. The left one is from
     ``all'' group and the right one is from ``specific'' group using clang as
-    the grouping rule.
+    the grouping rule. The right figure has a lefter oval than the left figure's, indicating better performance.
 
     \subsubsection{Top M constraint}
     \label{sec:top_m}
@@ -202,7 +205,8 @@
     explanation above, we use top 10 as example. The result for top 5 is
     also collected to evaluate the performance ratio and searching speedup.
     As a result, the top 5 constraint has 80\%, 93\% and 94\% performance ratio,
-    which suffers 4\%, 2\% and 1\% ratio decrease. In terms of searching time,
-    Capri-based \atl enjoys a overall 17X speedup which is incredible. Note
+    which suffers 4\%, 2\% and 1\% ratio decrease compared to the top 10 case.
+    In terms of searching time,
+    Capri-based \atl enjoys a overall 17X speedup, which is incredible. Note
     that top 5 constraint still performs better than original \atl in both
-    performance ratio and searching time. 
+    performance ratio and searching time.
